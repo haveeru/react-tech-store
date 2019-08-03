@@ -13,7 +13,7 @@ import Defaut from './pages/DefaultPage';
 import {Route, Switch} from 'react-router-dom';
 
 import Navbar from './components/Navbar';
-import Sidebar from './components/Sidbar';
+import Sidebar from './components/Sidebar';
 import SideCart from './components/SideCart';
 import Footer from './components/Footer';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import {ProductConsumer} from '../context';
+import {ProductConsumer} from '../context/context';
 
 
 const Sidbar = () => {
@@ -9,15 +9,14 @@ const Sidbar = () => {
         <ProductConsumer>
             {value => { 
                 const {links, sidebarOpen, handleSidebar} = value; 
-
                 return <SideWrapper show = {sidebarOpen}>
                     <ul>
                         {links.map(link => {
                             return (
-                                <li key={link.id}>
+                                <li key={link.id} onClick={handleSidebar}>
                                     <Link to={link.path} className='sidebar-link'>{link.text}</Link>
                                 </li>
-                            )
+                            );
                         })} 
                     </ul>
                 </SideWrapper>

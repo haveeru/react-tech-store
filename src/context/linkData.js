@@ -20,7 +20,7 @@ export const linkData = [
         path:'/contact'
     },
     {
-        id:3,
+        id:5,
         text:'cart',
         path:'/cart'
     }
