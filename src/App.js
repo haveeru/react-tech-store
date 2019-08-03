@@ -7,13 +7,24 @@ import About from './pages/AboutPage';
 import Products from './pages/ProductsPage';
 import Contact from './pages/ContactPage';
 import SingleProduct from './pages/SingleProductPage';
+import Cart from './pages/CartPage';
 import Defaut from './pages/DefaultPage';
+
+import {Route, Switch} from 'react-router-dom';
 
 
 function App() {
   return (
-    <h1>hello from tech store</h1>
+    <Switch>
+      <Route path="/" exact component = {Home}/>
+      <Route path="/about"  component = {About}/>
+      <Route path="/contact"  component = {Contact}/>
+      <Route path="/products"  component = {Products}/>
+      <Route path="/products/:id" exact component = {SingleProduct}/>
+      <Route path="/cart" exact component = {Cart}/>
+      <Route component = {Defaut}/>
+    </Switch>
   );
-}
+} 
 
 export default App;
