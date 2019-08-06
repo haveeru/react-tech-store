@@ -1,9 +1,16 @@
 import React from 'react';
+import Hero from '../components/Hero';
+import contactBcg from '../images/contactBcg.jpeg';
+import Contact from '../components/ContactPage/Contact';
 
 const ContactPage = () => {
     return (
         <>
-            <h1>Hellow from Contact Page</h1>
+            <Hero
+                img={contactBcg}
+            >
+            </Hero>
+            <Contact/>
         </>
     );
 };
