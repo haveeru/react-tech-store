@@ -15,7 +15,6 @@ class ProductProvider extends Component{
         links: linkData,
         socialIcons: SocialData,
         cart: [],
-        cartItems: 0,
         cartSubtotals: 0,
         cartTotal: 0,
         storeProucts: [],
@@ -23,6 +22,21 @@ class ProductProvider extends Component{
         featuredProducts: [],
         singleProduct: {},
         loading: true
+    }
+
+    componentDidMount() {
+        //from contentful items
+
+        this.setProducts(items); 
+    }
+
+    setProducts = (products) => {
+        let storeProucts = products.map(item => {
+            const {id} = item.sys;
+            const product = {id, ...item.fields};
+            return product;
+        })
+        let featuredProducts = storeProucts.filter(item => item.featured === true);
     }
 
     handleSidebar = () => {
