@@ -59,7 +59,7 @@ export default Services;
 
 const ServicesWrapper = styled.section`
     background: rgba(95, 183, 234, 0.5);
-    .serivices-cons {
+    .services-icon {
         font-size: 2.5rem;
         color: var(--primaryColor);
         p {
