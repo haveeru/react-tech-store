@@ -11,10 +11,10 @@ class ProductProvider extends Component{
     state = {
         sidebarOpen: false,
         cartOpen: false,
-        cartItems: 10,
         links: linkData,
         socialIcons: SocialData,
         cart: [],
+        cartItems: 0,
         cartSubtotals: 0,
         cartTotal: 0,
         storeProucts: [],
@@ -37,6 +37,42 @@ class ProductProvider extends Component{
             return product;
         })
         let featuredProducts = storeProucts.filter(item => item.featured === true);
+        this.setState({
+            storeProucts,
+            fitleredProducts: storeProucts,
+            featuredProducts,
+            cart:this.getStorageCart(),
+            singleProduct: this.getStorageProduct(),
+            loading: false
+        });
+    };
+
+    addToCart = (id) => {
+        console.log(`add to car ${id}`);
+    }
+
+    setSingleProduct = (id) => {
+        console.log(id);   
+    }
+
+    getStorageCart = () => {
+        return [];
+    };
+
+    getStorageProduct = () => {
+        return [];
+    }
+
+    getTotals = () => {
+
+    }
+
+    syncStorage = () => {
+
+    }
+
+    addTotals = () => {
+        
     }
 
     handleSidebar = () => {
@@ -62,7 +98,9 @@ class ProductProvider extends Component{
                 handleSidebar: this.handleSidebar,
                 handleCart: this.handleCart,
                 CloseCart: this.CloseCart,
-                OpenCart: this.OpenCart
+                OpenCart: this.OpenCart,
+                addToCart: this.addToCart,
+                setSingleProduct: this.setSingleProduct
             }}>
                 {this.props.children}
             </ProductContext.Provider>
