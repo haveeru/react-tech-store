@@ -1,7 +1,7 @@
 import React from 'react';
 import {FaFacebook, FaTwitter, FaLinkedin} from 'react-icons/fa';
 
-export const SocialData = [
+export const socialData = [
     {
         id: 1,
         icon: <FaFacebook className="icon" />,
