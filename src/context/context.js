@@ -20,7 +20,7 @@ class ProductProvider extends Component {
     filteredProducts: [],
     featuredProducts: [],
     singleProduct: {},
-    loading: false
+    loading: true
   };
   componentDidMount() {
     //from contentful items
@@ -65,7 +65,9 @@ class ProductProvider extends Component {
   };
   // get product from local storage
   getStorageProduct = () => {
-    return {};
+    return localStorage.getItem('singleProduct')
+      ? JSON.parse(localStorage.getItem('singleProduct'))
+      : {};
   };
   // get totals
   getTotals = () => {
@@ -130,7 +132,12 @@ class ProductProvider extends Component {
   };
   // set single product
   setSingleProduct = id => {
-    console.log(`set single product ${id}`);
+    let product = this.state.storeProducts.find(item => item.id ===id);
+    localStorage.setItem('singleProduct',JSON.stringify(product));
+    this.setState({
+      singleProduct:{...product},
+      loading: false
+    })
   };
 
   // handle sidebar
