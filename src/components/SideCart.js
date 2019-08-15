@@ -26,9 +26,12 @@ export default function SideCart() {
                             })}
                         </ul>
                         <h4 className="text-capitalize text-main">cart total : ${cartTotal}</h4>
-                        <Link to="/cart" className="main-link">
-                            cart page
-                        </Link>
+                        <div className="text-center py-5">
+                            <Link to="/cart" className="main-link">
+                                cart page
+                            </Link>  
+                        </div>
+                        
                     </CartWrapper>
                 );
             }}
