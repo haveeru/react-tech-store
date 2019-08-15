@@ -8,6 +8,16 @@ class FilterProducts extends Component {
             <ProductConsumer>
                 {value => {
                     const {search, min, max, company, price, shipping, handleChange, storeProducts} = value;
+                    
+                    let companies = new Set();
+                    companies.add('all');
+                    for(let product in storeProducts) {
+                        companies.add(storeProducts[product]["company"])
+                    }
+
+                    companies = [...companies];
+
+
                     return (
                         <div className="row my-5">
                             <div className="col-10 mx-auto">
@@ -22,15 +32,20 @@ class FilterProducts extends Component {
                                 <div>
                                     <label htmlFor="company">company</label>
                                     <select name="company" id="searcg" onChange={handleChange} value={company} className="filter-items">
-                                        <option value="all">all</option>
+                                        {/* <option value="all">all</option>
                                         <option value="fuji">fuji</option>
-                                        <option value="htc">htc</option>
+                                        <option value="htc">htc</option> */}
+                                        {
+                                            companies.map((company, index)=>{
+                                                return <option key={index} value={company}>{company}</option>
+                                            })
+                                        }
                                     </select>
                                 </div>
 
                                 {/* price range */}
                                 <div>
-                                    <label htmlFor="price"/>
+                                    <label htmlFor="price">price</label>
                                     <p className="mb-2">product price : <span>$ {price}</span></p>
                                     <input 
                                         type="range" 
@@ -45,14 +60,13 @@ class FilterProducts extends Component {
 
                                 {/* free shipping */}
                                 <div>
-                                    <label htmlFor="shipping" className="mx-2"/>
+                                    <label htmlFor="shipping">free shipping </label>
                                     <input 
                                         type="checkbox" 
                                         name="shipping" 
-                                        id="shipping" 
-                                        className="" 
+                                        id="shipping"  
                                         onChange={handleChange} 
-                                        value={shipping && true}
+                                        checked={shipping && true}
                                     />
                                 </div>
                                 </FilterWrapper>
