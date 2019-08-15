@@ -56,17 +56,17 @@ class ProductProvider extends Component {
   // get cart from local storage
   getStorageCart = () => {
     let cart;
-    if(localStorage.getItem('cart')){
-      cart = JSON.parse(localStorage.getItem('cart'))
-    }else{
-      cart = []
+    if (localStorage.getItem("cart")) {
+      cart = JSON.parse(localStorage.getItem("cart"));
+    } else {
+      cart = [];
     }
     return cart;
   };
   // get product from local storage
   getStorageProduct = () => {
-    return localStorage.getItem('singleProduct')
-      ? JSON.parse(localStorage.getItem('singleProduct'))
+    return localStorage.getItem("singleProduct")
+      ? JSON.parse(localStorage.getItem("singleProduct"))
       : {};
   };
   // get totals
@@ -102,7 +102,7 @@ class ProductProvider extends Component {
   };
   // sync storage
   syncStorage = () => {
-    localStorage.setItem('cart',JSON.stringify(this.state.cart));
+    localStorage.setItem("cart", JSON.stringify(this.state.cart));
   };
   //add to cart
   addToCart = id => {
@@ -132,12 +132,12 @@ class ProductProvider extends Component {
   };
   // set single product
   setSingleProduct = id => {
-    let product = this.state.storeProducts.find(item => item.id ===id);
-    localStorage.setItem('singleProduct',JSON.stringify(product));
+    let product = this.state.storeProducts.find(item => item.id === id);
+    localStorage.setItem("singleProduct", JSON.stringify(product));
     this.setState({
-      singleProduct:{...product},
+      singleProduct: { ...product },
       loading: false
-    })
+    });
   };
 
   // handle sidebar
@@ -156,23 +156,74 @@ class ProductProvider extends Component {
   openCart = () => {
     this.setState({ cartOpen: true });
   };
-// cart functionalality
-// increment
-increment = (id) => {
-  console.log(id);
-}
-// decrement
-decrement = (id) => {
-  console.log(id);
-}
-// remove item
-removeItem = (id) => {
-  console.log(id);
-}
-// clear cart
-clearCart = () => {
-  console.log('you just cleared the cart');
-}
+  //  cart functionality
+  // increment
+  increment = id => {
+    let tempCart = [...this.state.cart];
+    const cartItem = tempCart.find(item => item.id === id);
+    cartItem.count++;
+    cartItem.total = cartItem.count * cartItem.price;
+    cartItem.total = parseFloat(cartItem.total.toFixed(2));
+    this.setState(
+      () => {
+        return {
+          cart: [...tempCart]
+        };
+      },
+      () => {
+        this.addTotals();
+        this.syncStorage();
+      }
+    );
+  };
+  // decrement
+  decrement = id => {
+    let tempCart = [...this.state.cart];
+    const cartItem = tempCart.find(item => item.id === id);
+
+    cartItem.count = cartItem.count-1;
+    if(cartItem.count === 0 ){
+      this.removeItem(id);
+    }else{
+      cartItem.total = cartItem.count * cartItem.price;
+      cartItem.total = parseFloat(cartItem.total.toFixed(2));
+      this.setState(
+        () => {
+          return {
+            cart: [...tempCart]
+          };
+        },
+        () => {
+          this.addTotals();
+          this.syncStorage();
+        }
+      );
+    }
+  };
+  // removeItem
+  removeItem = id => {
+    let tempCart = [...this.state.cart];
+    tempCart = tempCart.filter(item => item.id !== id);
+    this.setState(
+      {
+        cart: [...tempCart]
+      },
+      () => {
+        this.addTotals();
+        this.syncStorage();
+      }
+    );
+  };
+
+  clearCart = () => {
+    this.setState({
+      cart: []
+    },
+      () => {
+        this.addTotals();
+        this.syncStorage();
+      })
+  };
 
   render() {
     return (

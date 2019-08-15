@@ -20,9 +20,9 @@ const CartList = () => {
                             return (
                                 <>
                                     {cart.map(item => (<CartItem key={item.id} 
-                                                                CartItem={item} 
+                                                                cartItem={item} 
                                                                 increment={increment} 
-                                                                derement={decrement}
+                                                                decrement={decrement}
                                                                 removeItem={removeItem}
                                                         >
 

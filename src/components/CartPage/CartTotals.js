@@ -9,7 +9,7 @@ const CartTotals = () => {
                     {value=>{
                         const {clearCart, cartSubTotal, cartTax, cartTotal} = value;
                         return <div className="col text-title text-center my-4">
-                            <button className="btn btn-outline-danger text-capitalize mb-4">
+                            <button className="btn btn-outline-danger text-capitalize mb-4" onClick={()=>clearCart()}>
                                 clear cart
                             </button>
                             <h3>subtotal :  ${cartSubTotal}</h3>
